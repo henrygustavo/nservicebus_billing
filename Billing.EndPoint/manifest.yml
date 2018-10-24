@@ -3,9 +3,10 @@ applications:
 - name: billingendpoint
   random-route: true
   memory: 128M
-
   docker:
     image: henrygustavo/billingendpoint
-  env:
-    ASPNETCORE_ENVIRONMENT: Production
-    
+  stack: cflinuxfs2
+  no-route: true    
+  health-check-type: process
+  services:
+  - hfuentes-rmq  
