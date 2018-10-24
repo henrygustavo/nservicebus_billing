@@ -1,0 +1,19 @@
+version: "3.2"
+
+networks:
+  backend:
+
+
+services:
+  billingendpoint:
+    image: henrygustavo/billingendpoint
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    environment: 
+      - ASPNETCORE_ENVIRONMENT=Production
+    container_name: billingendpoint
+    ports:
+      - "9008:80"
+    networks:
+      - backend

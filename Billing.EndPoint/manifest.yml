@@ -1,0 +1,11 @@
+﻿---
+applications:
+- name: billingendpoint
+  random-route: true
+  memory: 128M
+
+  docker:
+    image: henrygustavo/billingendpoint
+  env:
+    ASPNETCORE_ENVIRONMENT: Production
+    
