@@ -1,0 +1,31 @@
+anguage: csharp
+dist: trusty
+sudo: required
+mono: none
+dotnet: 2.1.300
+branches:
+  only:
+    - master
+services:
+  - docker
+before_install:
+  - docker-compose --version
+  - docker version
+install:
+  - export DOTNET_CLI_TELEMETRY_OPTOUT=1
+script:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker-compose build
+  - docker push henrygustavo/billingendpoint
+deploy:
+  - provider: cloudfoundry
+    username: $PIVOTAL_USERNAME
+    password: $PIVOTAL_PASSWORD
+    api: https://api.run.pivotal.io
+    organization: $PIVOTAL_ORG
+    space: development
+    manifest: ./Billing.EndPoint/manifest.yml
+notifications:
+  email:
+    on_success: change
+    on_failure: change
