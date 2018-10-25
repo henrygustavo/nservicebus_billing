@@ -1,12 +1,13 @@
 ﻿---
 applications:
 - name: billingendpoint
-  random-route: true
   memory: 128M
+  disk_quota: 2GB
+  instances: 1
   docker:
     image: henrygustavo/billingendpoint
-  stack: cflinuxfs2
-  no-route: true    
+  no-route: true
+  stack: cflinuxfs2   
   health-check-type: process
   services:
-  - hfuentes-rmq  
+  - hfuentes-rmq
